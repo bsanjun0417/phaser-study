@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Phaser Start</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
+  </head>
+  <body>
+    <script>
+      const config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        physics: {
+          default: "arcade",
+          arcade: {
+            gravity: { y: 500 },
+            debug: true,
+          },
+        },
+        scene: {
+          preload,
+          create,
+          update,
+        },
+      };
+
+      const game = new Phaser.Game(config);
+
+      function preload() {
+        this.load.image("player", "player.png");
+        this.load.image("sky", "sky.png");
+      }
+
+      function create() {
+        this.player = this.physics.add.sprite(200, 300, "player");
+        this.sky = this.add.image(400, 300, "sky");
+        this.player.setScale(0.5);
+        this.sky.setScale(0.5);
+      }
+
+      function update() {}
+    </script>
+  </body>
+</html>
