@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.90.0/phaser.min.js"
+        integrity="sha512-/tJYyDCrI7hnHWp45P189aOwPa6lTREosRhlxEIqx8skB4A3a3rD3iz4o335SJd4sORqjVHw5y1S2hq4hciwLw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+
+<body>
+
+    <script>
+ const config = {
+  type: Phaser.AUTO,
+  width: 800,
+  height: 600,
+  backgroundColor: '#222222',
+  scene: {
+    preload: preload,
+    create: create,
+    update: update
+  }
+};
+
+const game = new Phaser.Game(config);
+
+
+
+function preload() {
+  //  스프라이트 시트 로드
+  this.load.spritesheet('player', 'dog.png', {
+    frameWidth: 306,
+    frameHeight: 273
+
+    //전체 이미지 사이즈에서 얼마만큼 보여질지가 선택되는듯 
+    
+  });
+}
+
+function create() {
+  //  스프라이트 생성
+    this.player = this.add.sprite(400, 300, 'player');
+    this.player.setScale(0.5); // 잘 보이게 확대 (선택)
+
+  //  애니메이션 정의
+  this.anims.create({
+    key: 'walk',
+    frames: this.anims.generateFrameNumbers('player', {
+      start: 0, //프레임 순서를 정해주는거임 위에 preload에서 작성한
+      //framewidth frameheight의 크기만큼 프레임을 잡음
+      end: 3
+      //start end로 순서 정해주는겨
+    }),
+    frameRate: 8, //1초동안 몇 프레임을 보여줄지
+    repeat: -1 //0이면 한번 재생 1이면 2번재생,-1이면 무한반복
+    
+  });
+
+  //  애니메이션 재생
+    this.player.play('walk');
+}
+
+function update() {
+
+  this.player.x += 1
+
+}
+
+    </script>
+</body>
+
+</html>
